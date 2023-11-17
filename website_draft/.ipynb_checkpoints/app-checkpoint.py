@@ -7,7 +7,10 @@ import plotly.express as px
 app = Flask(__name__)
 
 # Initialize  database connection
-conn = sqlite3.connect("schools.db")
+conn = sqlite3.connect("schools.db", check_same_thread=False)
+df_iter = pd.read_csv("schools.csv", chunksize = 1000)
+for df in df_iter:
+    df.to_sql("schools", conn, if_exists = "append", index = False)
 
 
 def query_schools_database(state):
@@ -35,7 +38,7 @@ def index():
 def process():
     selected_state = request.form['state']
     schools_data = query_schools_database(selected_state)
-    return render_template('result.html', schools_data=schools_data)
+    return render_template('result.html')
 
 if __name__ == '__main__':
     app.run(debug=True, port=8080)
