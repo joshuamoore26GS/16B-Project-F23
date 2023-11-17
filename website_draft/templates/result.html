@@ -2,6 +2,8 @@
 <html>
 <head>
     <title>Schools Data</title>
+    <!-- Include necessary CSS and JS files for Plotly -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
     <h1>Schools Information</h1>
@@ -9,10 +11,6 @@
     <table border="1">
         <thead>
             <tr>
-                <th>State Name</th>
-                <th>LEA Name</th>
-                <th>Street</th>
-                <th>ZIP Code</th>
                 <th>City</th>
                 <th>Latitude</th>
                 <th>Longitude</th>
@@ -22,10 +20,6 @@
         <tbody>
             {% for index, row in schools_data.iterrows() %}
             <tr>
-                <td>{{ row['statename'] }}</td>
-                <td>{{ row['lea_name'] }}</td>
-                <td>{{ row['mstreet1'] }}</td>
-                <td>{{ row['mzip'] }}</td>
                 <td>{{ row['city'] }}</td>
                 <td>{{ row['latitude'] }}</td>
                 <td>{{ row['longitude'] }}</td>
@@ -34,5 +28,8 @@
             {% endfor %}
         </tbody>
     </table>
+
+    <!-- Add a div to render the Plotly figure -->
+    <div id="map">{{ plotly_html|safe }}</div>
 </body>
 </html>
