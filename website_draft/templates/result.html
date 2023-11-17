@@ -13,6 +13,9 @@
                 <th>LEA Name</th>
                 <th>Street</th>
                 <th>ZIP Code</th>
+                <th>City</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
                 <!-- Add more headers as needed based on your DataFrame -->
             </tr>
         </thead>
@@ -23,6 +26,9 @@
                 <td>{{ row['lea_name'] }}</td>
                 <td>{{ row['mstreet1'] }}</td>
                 <td>{{ row['mzip'] }}</td>
+                <td>{{ row['city'] }}</td>
+                <td>{{ row['latitude'] }}</td>
+                <td>{{ row['longitude'] }}</td>
                 <!-- Add more columns as needed based on your DataFrame -->
             </tr>
             {% endfor %}
