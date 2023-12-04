@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Schools Data</title>
+</head>
+<body>
+    <h1>Schools Information</h1>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>State Name</th>
+                <th>LEA Name</th>
+                <th>Street</th>
+                <th>ZIP Code</th>
+                <th>City</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <!-- Add more headers as needed based on your DataFrame -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for index, row in schools_data.iterrows() %}
+            <tr>
+                <td>{{ row['statename'] }}</td>
+                <td>{{ row['lea_name'] }}</td>
+                <td>{{ row['mstreet1'] }}</td>
+                <td>{{ row['mzip'] }}</td>
+                <td>{{ row['city'] }}</td>
+                <td>{{ row['latitude'] }}</td>
+                <td>{{ row['longitude'] }}</td>
+                <!-- Add more columns as needed based on your DataFrame -->
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

@@ -3,8 +3,10 @@ import pandas as pd
 import sqlite3
 import plotly.express as px
 
+
 app = Flask(__name__)
 
+<<<<<<< Updated upstream
 # Initialize database connection
 conn = sqlite3.connect("schools.db", check_same_thread=False)
 df_iter = pd.read_csv("schools.csv", chunksize=1000)
@@ -30,6 +32,8 @@ def query_schools_database(state):
 
     return df
 
+=======
+>>>>>>> Stashed changes
 @app.route('/')
 def index():
     return render_template('index.html', PageTitle="CRT Data")
@@ -48,4 +52,4 @@ def process():
     return render_template('result.html', schools_data=schools_data, plotly_html=plotly_html)
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8080)
+    app.run(debug=True, port=5000)
