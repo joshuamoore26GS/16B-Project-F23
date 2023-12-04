@@ -1,35 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Schools Data</title>
-    <!-- Include necessary CSS and JS files for Plotly -->
+    <title>District Data for {{ state_name }}</title>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 50px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Schools Information</h1>
-
+    <h1>District Information</h1>
+    <div id="map">{{ plotly_html|safe }}</div>
     <table border="1">
         <thead>
             <tr>
                 <th>City</th>
                 <th>Latitude</th>
                 <th>Longitude</th>
-                <!-- Add more headers as needed based on your DataFrame -->
+                <th>Proficiency</th>
             </tr>
         </thead>
         <tbody>
             {% for index, row in schools_data.iterrows() %}
             <tr>
-                <td>{{ row['city'] }}</td>
-                <td>{{ row['latitude'] }}</td>
-                <td>{{ row['longitude'] }}</td>
-                <!-- Add more columns as needed based on your DataFrame -->
+                <td>{{ row['NAME'] }}</td>
+                <td>{{ row['LAT'] }}</td>
+                <td>{{ row['LON'] }}</td>
+                <td>{{ row['Average Assessment Proficiency'] }}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 
-    <!-- Add a div to render the Plotly figure -->
     <div id="map">{{ plotly_html|safe }}</div>
 </body>
 </html>
