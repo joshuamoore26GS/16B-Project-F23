@@ -104,15 +104,17 @@ def process():
     state_name = selected_state
     selected_state = state_code_conversion(selected_state)
     schools_data = query_schools_database(selected_state)
+    prof = pd.read_csv(f"{state_name}_df.csv")
+    final_df = pd.merge(schools_data, prof, on='NAME', how='left')
     conn.close()
 
     # Create Plotly figure
-    fig = px.scatter_mapbox(schools_data, lat='LAT', lon='LON', zoom=5, mapbox_style='carto-positron', hover_name='NAME')
+    fig = px.scatter_mapbox(final_df, lat='LAT', lon='LON', zoom=5, mapbox_style='carto-positron', hover_name='NAME', hover_data='Average Assessment Proficiency', color='Average Assessment Proficiency')
 
     # Convert the Plotly figure to HTML
     plotly_html = fig.to_html(full_html=False)
 
-    return render_template('result.html', schools_data=schools_data, plotly_html=plotly_html, state_name=state_name)
+    return render_template('result.html', schools_data=final_df, plotly_html=plotly_html, state_name=state_name)
 
 if __name__ == '__main__':
     app.run(debug=True, port=8080)
