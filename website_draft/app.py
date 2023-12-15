@@ -3,8 +3,10 @@ import pandas as pd
 import sqlite3
 import plotly.express as px
 
+
 app = Flask(__name__)
 
+<<<<<<< Updated upstream
 # Initialize database connection
 conn = sqlite3.connect("schools.db", check_same_thread=False)
 # this prevents duplicate information from being added to the database, so if you run the same page multiple times you only get 1 set of information
@@ -93,6 +95,8 @@ def query_schools_database(state):
 
 
 
+=======
+>>>>>>> Stashed changes
 @app.route('/')
 def index():
     return render_template('index.html', PageTitle="School Data")
@@ -117,4 +121,4 @@ def process():
     return render_template('result.html', schools_data=final_df, plotly_html=plotly_html, state_name=state_name)
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8080)
+    app.run(debug=True, port=5000)
