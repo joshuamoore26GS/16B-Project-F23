@@ -7,8 +7,8 @@ import plotly.io as pio
 pio.renderers.default="iframe"
 
 
-app = Flask(__name__)
-app.secret_key = "PIC16B"
+app = Flask(__name__) #creates Flask app
+app.secret_key = "PIC16B" #sets secret key
 
 myProjectDataAnalysisFunctions.generate_state_districts_db() # generates the database
 
@@ -59,4 +59,4 @@ def district_page(district_name): # renders a page when someone clicks on a dist
     return render_template('district_page.html', schools_data=district_df, plotly_html=plotly_html, state_name=state_name, state_crt=state_crt)
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=5009)
