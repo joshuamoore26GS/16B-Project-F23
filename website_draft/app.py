@@ -4,8 +4,8 @@ import sqlite3
 import plotly.express as px
 
 
-app = Flask(__name__)
-app.secret_key = "PIC16B"
+app = Flask(__name__) #creates Flask app
+app.secret_key = "PIC16B" #sets secret key
 
 # Initialize database connection
 conn = sqlite3.connect("schools.db", check_same_thread=False)
