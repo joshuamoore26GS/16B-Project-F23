@@ -203,4 +203,4 @@ def district_page(district_name):
     return render_template('district_page.html', schools_data=district_df, plotly_html=plotly_html, state_name=state_name, state_crt=state_crt)
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=5009)
