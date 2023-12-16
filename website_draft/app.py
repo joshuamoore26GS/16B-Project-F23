@@ -1,10 +1,11 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session
 import pandas as pd
 import sqlite3
 import plotly.express as px
 
 
 app = Flask(__name__)
+app.secret_key = "PIC16B"
 
 # Initialize database connection
 conn = sqlite3.connect("schools.db", check_same_thread=False)
@@ -162,12 +163,16 @@ def process():
     conn = sqlite3.connect("schools.db", check_same_thread=False)
     selected_state = request.form['state']
     state_name = selected_state
+    session["state_name"] = state_name
     selected_state = state_code_conversion(selected_state)
+    session["selected_state"] = selected_state
     state_crt = state_crt_condition(state_name)
+    session["state_crt"] = state_crt
     schools_data = query_schools_database(selected_state)
     prof = pd.read_csv(f"{state_name}_df.csv")
     final_df = pd.merge(schools_data, prof, on='NAME', how='left')
     conn.close()
+    print(session)
 
     # Create Plotly figure
     fig = px.scatter_mapbox(final_df, lat='LAT', lon='LON', zoom=5, mapbox_style='carto-positron', hover_name='NAME', hover_data='Average Assessment Proficiency', color='Average Assessment Proficiency', color_continuous_midpoint=50)
@@ -179,7 +184,23 @@ def process():
 
 @app.route('/district/<district_name>')
 def district_page(district_name):
-    return render_template('district_page.html', district_name=district_name, district_data=district_data)
+    conn = sqlite3.connect("schools.db", check_same_thread=False)
+    state_name = session.get("state_name")
+    selected_state = session["selected_state"]
+    state_crt = state_crt_condition(state_name)
+    schools_data = query_schools_database(selected_state)
+    prof = pd.read_csv(f"{state_name}_df.csv")
+    final_df = pd.merge(schools_data, prof, on='NAME', how='left')
+    conn.close()
+    district_df = final_df.loc[final_df["NAME"] == district_name] 
+    
+    # Create Plotly figure
+    fig = px.scatter_mapbox(district_df, lat='LAT', lon='LON', zoom=5, mapbox_style='carto-positron', hover_name='NAME', hover_data='Average Assessment Proficiency', color='Average Assessment Proficiency', color_continuous_midpoint=50)
+
+    # Convert the Plotly figure to HTML
+    plotly_html = fig.to_html(full_html=False)
+    
+    return render_template('district_page.html', schools_data=district_df, plotly_html=plotly_html, state_name=state_name, state_crt=state_crt)
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
