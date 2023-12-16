@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>District Data for {{ state_name }}</title>
+    <title>District Data for {{ district_name }}</title>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <style>
         body {
@@ -14,7 +14,7 @@
     </style>
 </head>
 <body>
-    <h1>District Information for {{ state_name }} </h1>
+    <h1>District Information for {{ district_name }} </h1>
     <h2>CRT status: {{ state_crt }}
     <div id="map">{{ plotly_html|safe }}</div>
     <table border="1">
@@ -27,7 +27,7 @@
         <tbody>
             {% for index, row in schools_data.iterrows() %}
             <tr>
-                <td><a href="{{ url_for('district_page', district_name=row['NAME']) }}">{{ row['NAME'] }}</a></td>
+                <td>{{ row['NAME'] }}</td>
                 <td>{{ row['Average Assessment Proficiency'] }}</td>
             </tr>
             {% endfor %}

@@ -12,8 +12,6 @@ app.secret_key = "PIC16B" #sets secret key
 
 myProjectDataAnalysisFunctions.generate_state_districts_db() # generates the database
 
-B = "Average Assessment Proficiency"
-
 @app.route('/')
 def index(): # renders the initial page
     return render_template('index.html', PageTitle="School Data")
@@ -30,9 +28,10 @@ def process(): # renders the page based on what state is chosen on the first pag
     schools_data = myProjectDataAnalysisFunctions.generate_state_districts_df(selected_state) # creates a dataframe for the given state from the database
     prof = pd.read_csv(f"{state_name}_df.csv") # reads in the already-formatted state database for the given state
     final_df = pd.merge(schools_data, prof, on='NAME', how='left') # merges the dfs
+    print(final_df)
 
     # creates a plotly figure
-    fig = px.scatter_mapbox(final_df, lat='LAT', lon='LON', zoom=5, mapbox_style='carto-positron', hover_name='NAME', hover_data='Average Assessment Proficiency', color='Average Assessment Proficiency', color_continuous_midpoint=50)
+    fig = px.scatter_mapbox(final_df, lat='LAT', lon='LON', zoom=5, mapbox_style='carto-positron', hover_name='NAME', hover_data=['Average Assessment Proficiency'], color='Average Assessment Proficiency', color_continuous_midpoint=50)
 
     # converts the plotly figure to HTML for display
     plotly_html = fig.to_html(full_html=False)
@@ -51,7 +50,7 @@ def district_page(district_name): # renders a page when someone clicks on a dist
     district_df = final_df.loc[final_df["NAME"] == district_name]  # extracts just the row from the district chosen
     
     # creates a plotly figure
-    fig = px.scatter_mapbox(district_df, lat='LAT', lon='LON', zoom=5, mapbox_style='carto-positron', hover_name='NAME', hover_data=B, color='Average Assessment Proficiency', color_continuous_midpoint=50)
+    fig = px.scatter_mapbox(district_df, lat='LAT', lon='LON', zoom=5, mapbox_style='carto-positron', hover_name='NAME', hover_data=["Average Assessment Proficiency"], color='Average Assessment Proficiency', color_continuous_midpoint=50)
 
     # convert the plotly figure to HTML for display
     plotly_html = fig.to_html(full_html=False)
