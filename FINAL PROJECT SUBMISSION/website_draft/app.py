@@ -28,7 +28,6 @@ def process(): # renders the page based on what state is chosen on the first pag
     schools_data = myProjectDataAnalysisFunctions.generate_state_districts_df(selected_state) # creates a dataframe for the given state from the database
     prof = pd.read_csv(f"{state_name}_df.csv") # reads in the already-formatted state database for the given state
     final_df = pd.merge(schools_data, prof, on='NAME', how='left') # merges the dfs
-    print(final_df)
 
     # creates a plotly figure
     fig = px.scatter_mapbox(final_df, lat='LAT', lon='LON', zoom=5, mapbox_style='carto-positron', hover_name='NAME', hover_data=['Average Assessment Proficiency'], color='Average Assessment Proficiency', color_continuous_midpoint=50)
