@@ -30,10 +30,10 @@ def process(): # renders the page based on what state is chosen on the first pag
     prof = pd.read_csv(f"{state_name}_df.csv") # reads in the already-formatted state database for the given state
     final_df = pd.merge(schools_data, prof, on='NAME', how='left') # merges the dfs
 
-    # Creates a plotly figure
+    # creates a plotly figure
     fig = px.scatter_mapbox(final_df, lat='LAT', lon='LON', zoom=5, mapbox_style='carto-positron', hover_name='NAME', hover_data='Average Assessment Proficiency', color='Average Assessment Proficiency', color_continuous_midpoint=50)
 
-    # Converts the plotly figure to HTML for display
+    # converts the plotly figure to HTML for display
     plotly_html = fig.to_html(full_html=False)
 
     # renders the HTML template using the variables and dfs created
@@ -49,10 +49,10 @@ def district_page(district_name): # renders a page when someone clicks on a dist
     final_df = pd.merge(schools_data, prof, on='NAME', how='left') # merges them as in the previous page
     district_df = final_df.loc[final_df["NAME"] == district_name]  # extracts just the row from the district chosen
     
-    # Creates a plotly figure
+    # creates a plotly figure
     fig = px.scatter_mapbox(district_df, lat='LAT', lon='LON', zoom=5, mapbox_style='carto-positron', hover_name='NAME', hover_data='Average Assessment Proficiency', color='Average Assessment Proficiency', color_continuous_midpoint=50)
 
-    # Convert the plotly figure to HTML for display
+    # convert the plotly figure to HTML for display
     plotly_html = fig.to_html(full_html=False)
     
     # renders the HTML template using the variables and dfs created
