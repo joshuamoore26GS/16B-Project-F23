@@ -14,14 +14,13 @@
     </style>
 </head>
 <body>
-    <h1>District Information</h1>
+    <h1>District Information for {{ state_name }} </h1>
+    <h2>CRT status: {{ state_crt }}
     <div id="map">{{ plotly_html|safe }}</div>
     <table border="1">
         <thead>
             <tr>
-                <th>City</th>
-                <th>Latitude</th>
-                <th>Longitude</th>
+                <th>District</th>
                 <th>Proficiency</th>
             </tr>
         </thead>
@@ -29,13 +28,13 @@
             {% for index, row in schools_data.iterrows() %}
             <tr>
                 <td>{{ row['NAME'] }}</td>
-                <td>{{ row['LAT'] }}</td>
-                <td>{{ row['LON'] }}</td>
                 <td>{{ row['Average Assessment Proficiency'] }}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+    
+    <p>For entries that say "nan", there is no data on their proficiency. Proficiency is measured based on the percent of students that reach a desired score on state testing. </p>
 
     <div id="map">{{ plotly_html|safe }}</div>
 </body>

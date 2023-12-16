@@ -3,6 +3,7 @@ import pandas as pd
 import sqlite3
 import plotly.express as px
 
+
 app = Flask(__name__)
 
 # Initialize database connection
@@ -12,7 +13,67 @@ if not conn.execute("SELECT name FROM sqlite_master WHERE type='table' AND name=
     df_iter = pd.read_csv("All_US_Schools.csv", chunksize=1000)
     for df_chunk in df_iter:
         df_chunk.to_sql("schools", conn, if_exists="append", index=False)
+    
+def state_crt_condition(state):
+    """
+    retrieve the status of CRT in a given state
 
+    :state: the name of the state to be investigated
+    """
+    state = state.lower() # removes any casing issues
+    state_crt = { # contains all the state information
+        "alabama": "No CRT",
+        "alaska": "CRT",
+        "arizona": "CRT",
+        "arkansas": "No CRT",
+        "california": "CRT",
+        "colorado": "CRT",
+        "connecticut": "CRT",
+        "delaware": "CRT",
+        "florida": "No CRT",
+        "georgia": "No CRT",
+        "hawaii": "CRT",
+        "idaho": "No CRT",
+        "illinois": "CRT",
+        "indiana": "CRT",
+        "iowa": "No CRT",
+        "kansas": "CRT",
+        "kentucky": "No CRT",
+        "louisiana": "CRT",
+        "maine": "CRT",
+        "maryland": "CRT",
+        "massachusetts": "CRT",
+        "michigan": "CRT",
+        "minnesota": "CRT",
+        "mississippi": "No CRT",
+        "missouri": "CRT",
+        "montana": "No CRT",
+        "nebraska": "CRT",
+        "nevada": "CRT",
+        "new hampshire": "No CRT",
+        "new jersey": "CRT",
+        "new mexico": "CRT",
+        "new york": "CRT",
+        "north carolina": "CRT",
+        "north dakota": "No CRT",
+        "ohio": "CRT",
+        "oklahoma": "No CRT",
+        "oregon": "CRT",
+        "pennsylvania": "CRT",
+        "rhode island": "CRT",
+        "south carolina": "No CRT",
+        "south dakota": "No CRT",
+        "tennessee": "No CRT",
+        "texas": "No CRT",
+        "utah": "No CRT",
+        "vermont": "CRT",
+        "virginia": "No CRT",
+        "washington": "CRT",
+        "west virginia": "CRT",
+        "wisconsin": "CRT",
+        "wyoming": "CRT",
+    }
+    return state_crt.get(state)
     
 def state_code_conversion(state):
     """
@@ -21,7 +82,7 @@ def state_code_conversion(state):
     :state: the name of the state to be investigated
     """
     state = state.lower() # removes any casing issues
-    state_codon = {
+    state_codon = { # contains all the state information
         "alabama": "AL",
         "alaska": "AK",
         "arizona": "AZ",
@@ -92,7 +153,6 @@ def query_schools_database(state):
     return pd.read_sql_query(cmd, conn)
 
 
-
 @app.route('/')
 def index():
     return render_template('index.html', PageTitle="School Data")
@@ -103,18 +163,23 @@ def process():
     selected_state = request.form['state']
     state_name = selected_state
     selected_state = state_code_conversion(selected_state)
+    state_crt = state_crt_condition(state_name)
     schools_data = query_schools_database(selected_state)
     prof = pd.read_csv(f"{state_name}_df.csv")
     final_df = pd.merge(schools_data, prof, on='NAME', how='left')
     conn.close()
 
     # Create Plotly figure
-    fig = px.scatter_mapbox(final_df, lat='LAT', lon='LON', zoom=5, mapbox_style='carto-positron', hover_name='NAME', hover_data='Average Assessment Proficiency', color='Average Assessment Proficiency')
+    fig = px.scatter_mapbox(final_df, lat='LAT', lon='LON', zoom=5, mapbox_style='carto-positron', hover_name='NAME', hover_data='Average Assessment Proficiency', color='Average Assessment Proficiency', color_continuous_midpoint=50)
 
     # Convert the Plotly figure to HTML
     plotly_html = fig.to_html(full_html=False)
 
-    return render_template('result.html', schools_data=final_df, plotly_html=plotly_html, state_name=state_name)
+    return render_template('result.html', schools_data=final_df, plotly_html=plotly_html, state_name=state_name, state_crt=state_crt)
+
+@app.route('/district/<district_name>')
+def district_page(district_name):
+    return render_template('district_page.html', district_name=district_name, district_data=district_data)
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8080)
+    app.run(debug=True, port=5000)

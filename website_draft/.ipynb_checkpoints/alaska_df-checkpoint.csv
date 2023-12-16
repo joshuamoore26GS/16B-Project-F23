@@ -1,34 +1,55 @@
-NAME,Average Assessment Proficiency
-Alaska Gateway School District,0.0
-Aleutian Region School District,0.0
-Anchorage School District,13.5
-Annette Island School District,0.0
-Bering Strait School District,0.0
-Chugach School District,0.0
-Denali School District,0.0
-Dillingham School District,0.0
-Fairbanks School District,16.566666666666666
-Galena School District,0.0
-Hoonah School District,0.0
-Hydaburg School District,0.0
-Juneau School District,13.333333333333334
-Kenai Peninsula School District,13.333333333333334
-Ketchikan School District,0.0
-Kodiak Island School District,0.0
-Kuspuk School District,0.0
-Lake and Peninsula School District,0.0
-Lower Kuskokwim School District,13.333333333333334
-Lower Yukon School District,0.0
-Mat-Su School District,9.4
-Nenana School District,0.0
-Nome School District,0.0
-North Slope School District,0.0
-Northwest Arctic School District,0.0
-Petersburg School District,0.0
-Saint Mary's School District,0.0
-Sitka School District,16.666666666666668
-Southeast Island School District,0.0
-Valdez School District,0.0
-Yukon Flats School District,0.0
-Yukon-Koyukuk School District,0.0
-Yupiit School District,0.0
+STATE,NAME,LAT,LON,Average Assessment Proficiency
+AK,Lower Kuskokwim School District,60.802916,-161.77297,13.333333333333334
+AK,Lower Yukon School District,62.092018,-163.724886,0.0
+AK,Yupiit School District,60.913883,-161.448992,0.0
+AK,Kashunamiut School District,61.531048,-165.585866,
+AK,Mount Edgecumbe,57.050928,-135.351918,
+AK,Aleutians East Borough School District,55.342221,-160.496135,
+AK,Aleutian Region School District,61.173216,-149.882214,0.0
+AK,Bering Strait School District,63.876727,-160.793772,0.0
+AK,Bristol Bay Borough School District,58.733307,-157.004582,
+AK,Alaska Gateway School District,63.333206,-142.958861,0.0
+AK,Cordova City School District,60.543043,-145.757525,
+AK,Copper River School District,62.11293,-145.526532,
+AK,Craig City School District,55.475526,-133.1372,
+AK,Delta/Greely School District,64.043075,-145.711185,
+AK,Dillingham City School District,59.042379,-158.464858,
+AK,Galena City School District,64.746135,-156.878509,
+AK,Ketchikan Gateway Borough School District,55.353558,-131.677936,
+AK,Anchorage School District,61.193958,-149.775759,13.5
+AK,Juneau Borough School District,58.302965,-134.424249,
+AK,Sitka School District,57.065302,-135.351601,16.666666666666668
+AK,Haines Borough School District,59.234574,-135.453573,
+AK,Hoonah City School District,58.108798,-135.442182,
+AK,Hydaburg City School District,55.207545,-132.825933,
+AK,Kake City School District,56.977702,-133.947065,
+AK,Kenai Peninsula Borough School District,60.48968,-151.071451,
+AK,Klawock City School District,55.553553,-133.099033,
+AK,Kodiak Island Borough School District,57.794069,-152.395226,
+AK,Lake and Peninsula Borough School District,58.701946,-156.666093,
+AK,Matanuska-Susitna Borough School District,61.611321,-149.097358,
+AK,Iditarod Area School District,62.95433,-155.595578,
+AK,Annette Island School District,55.126236,-131.577064,0.0
+AK,Nenana City School District,64.561776,-149.088866,
+AK,Nome Public Schools,64.542453,-165.40547,
+AK,Fairbanks North Star Borough School District,64.842168,-147.718047,
+AK,North Slope Borough School District,71.291244,-156.788489,
+AK,Northwest Arctic Borough School District,66.901524,-162.586946,
+AK,Pelican City School District,57.956804,-136.222059,
+AK,Petersburg Borough School District,56.814831,-132.954464,
+AK,Pribilof School District,57.120896,-170.279219,
+AK,Saint Mary's School District,62.052226,-163.180707,0.0
+AK,Skagway School District,59.463181,-135.307408,
+AK,Southeast Island School District,55.689263,-132.524451,0.0
+AK,Southwest Region School District,59.043046,-158.468244,
+AK,Tanana City School District,65.171308,-152.087844,
+AK,Unalaska City School District,53.872671,-166.529624,
+AK,Chatham School District,57.497734,-134.584631,
+AK,Kuspuk School District,61.582025,-159.538328,0.0
+AK,Denali Borough School District,63.872903,-149.015539,
+AK,Yukon Flats School District,66.564638,-145.254014,0.0
+AK,Valdez City School District,61.133205,-146.376124,
+AK,Chugach School District,61.1364,-149.848232,0.0
+AK,Wrangell Public School District,56.47256,-132.374653,
+AK,Yakutat School District,59.546637,-139.723329,
+AK,Yukon-Koyukuk School District,64.83593,-147.826946,0.0
